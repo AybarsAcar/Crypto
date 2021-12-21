@@ -20,7 +20,7 @@ class HomeViewModel: ObservableObject {
   
   @Published var isloading: Bool = false
   
-  @Published var sortOption: SortOption = .holdings
+  @Published var sortOption: SortOption = .rank
   
   
   private let _coinDataService: CoinDataService = CoinDataService()
@@ -45,10 +45,10 @@ class HomeViewModel: ObservableObject {
     // this will update the local allCoins variable
     // if no search text is applied then returns all hte coins
     $searchText
-      .combineLatest(_coinDataService.$allCoins) // when either changes it will be published
+      .combineLatest(_coinDataService.$allCoins, $sortOption) // when either changes it will be published
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main) // wait 0.5 seconds before running this code
-      .map { (text, startingCoins) -> [Coin] in
-        return self.filterCoins(searchText: text, coins: startingCoins)
+      .map { (text, startingCoins, newSortOption) -> [Coin] in
+        return self.filterAndSortCoins(searchText: text, coins: startingCoins, sort: newSortOption)
       }
       .sink { [weak self] returnedCoins in
         self?.allCoins = returnedCoins
@@ -64,8 +64,10 @@ class HomeViewModel: ObservableObject {
       .map { (coins, portfolioItems) -> [Coin] in
         return self.mapAllCoinsToPortfolioCoins(coins: coins, portfolioItems: portfolioItems)
       }
-      .sink { [weak self] returnedCoins in
-        self?.portfolioCoins = returnedCoins
+      .sink { [weak self] returnedCoins in // they are already semi-sorted from the subscriber above
+
+        guard let self = self else { return }
+        self.portfolioCoins = self.sortPortfolioCoinsIfNeeded(coins: returnedCoins)
       }
       .store(in: &_cancellables)
     
@@ -147,6 +149,49 @@ class HomeViewModel: ObservableObject {
     stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
     
     return stats
+  }
+  
+  
+  private func filterAndSortCoins(searchText: String, coins: [Coin], sort: SortOption) -> [Coin] {
+    var updatedCoins = filterCoins(searchText: searchText, coins: coins)
+    
+    sortCoins(&updatedCoins, sort: sort)
+    
+    return updatedCoins
+  }
+  
+  
+  private func sortCoins(_ coins: inout [Coin], sort: SortOption) {
+    switch sortOption {
+    case .rank, .holdings:
+      coins.sort { (coin1, coin2) -> Bool in
+        return coin1.rank < coin2.rank
+      }
+    case .rankReversed, .holdingsReversed:
+      coins.sort(by: { $0.rank > $1.rank })
+    case .price:
+      coins.sort(by: { $0.currentPrice > $1.currentPrice })
+    case .priceReversed:
+      coins.sort(by: { $0.currentPrice < $1.currentPrice })
+    }
+  }
+  
+  
+  /// cannot do inout becuase the values returned in .sink are immutable
+  /// so a new array required to be created
+  private func sortPortfolioCoinsIfNeeded(coins: [Coin]) -> [Coin] {
+    
+    switch sortOption {
+    case .holdings:
+      return coins.sorted(by: { $0.totalCurrentHoldingsValue > $1.totalCurrentHoldingsValue })
+      
+    case .holdingsReversed:
+      return coins.sorted(by: { $0.totalCurrentHoldingsValue < $1.totalCurrentHoldingsValue })
+      
+    default:
+      return coins
+    }
+    
   }
   
   
