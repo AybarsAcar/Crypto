@@ -41,11 +41,17 @@ struct HomeView: View {
         
         if !showPortfolio {
           allCoinsList
+            .refreshable {
+              viewModel.reloadData()
+            }
             .transition(.move(edge: .leading))
         }
         
         if showPortfolio {
           portfolioCoinsList
+            .refreshable {
+              viewModel.reloadData()
+            }
             .transition(.move(edge: .trailing))
         }
         

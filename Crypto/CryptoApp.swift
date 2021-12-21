@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CryptoApp: App {
-
+  
   @StateObject private var viewModel = HomeViewModel()
   
   init() {
