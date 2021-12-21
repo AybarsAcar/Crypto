@@ -28,6 +28,7 @@ struct CoinRowView: View {
       
     }
     .font(.subheadline) // anything not formatted will be a .subheadline
+    .background(Color.theme.background.opacity(0.001)) // to make whole view clickable
   }
 }
 

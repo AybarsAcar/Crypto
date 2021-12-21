@@ -16,6 +16,12 @@ struct HomeView: View {
   
   @State private var isPortfolioViewDisplayed: Bool = false
   
+  
+  // navigation variables
+  @State private var selectedCoin: Coin? = nil
+  @State private var isDetailViewDisplayed: Bool = false
+  
+  
   var body: some View {
     
     ZStack {
@@ -58,6 +64,9 @@ struct HomeView: View {
         Spacer()
       }
     }
+    .background(
+      NavigationLink(destination: DetailLoadingView(coin: $selectedCoin), isActive: $isDetailViewDisplayed, label: { EmptyView() })
+    )
   }
 }
 
@@ -116,6 +125,9 @@ extension HomeView {
       ForEach(viewModel.allCoins) { coin in
         CoinRowView(coin: coin, showHoldingsColumn: false)
           .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+          .onTapGesture {
+            lazyNavigate(coin: coin)
+          }
       }
     }
     .listStyle(.plain)
@@ -126,6 +138,9 @@ extension HomeView {
       ForEach(viewModel.portfolioCoins) { coin in
         CoinRowView(coin: coin, showHoldingsColumn: true)
           .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+          .onTapGesture {
+            lazyNavigate(coin: coin)
+          }
       }
     }
     .listStyle(.plain)
@@ -182,5 +197,11 @@ extension HomeView {
     .font(.caption)
     .foregroundColor(.theme.secondaryText)
     .padding(.horizontal)
+  }
+  
+  
+  private func lazyNavigate(coin: Coin) {
+    selectedCoin = coin
+    isDetailViewDisplayed.toggle()
   }
 }
