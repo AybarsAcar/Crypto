@@ -14,6 +14,8 @@
 		004382DD27729BEC007C357A /* DetailLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004382DC27729BEC007C357A /* DetailLoadingView.swift */; };
 		004382DF27729DB0007C357A /* CoinDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004382DE27729DB0007C357A /* CoinDetail.swift */; };
 		004382E127729E3B007C357A /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004382E027729E3B007C357A /* ViewExtensions.swift */; };
+		004382E32772A179007C357A /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004382E22772A179007C357A /* DetailViewModel.swift */; };
+		004382E52772A1A7007C357A /* CoinDetailDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004382E42772A1A7007C357A /* CoinDetailDataService.swift */; };
 		004FAFAA277133F7004ED82B /* CryptoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004FAFA9277133F7004ED82B /* CryptoApp.swift */; };
 		004FAFAC277133F7004ED82B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004FAFAB277133F7004ED82B /* ContentView.swift */; };
 		004FAFAE277133F9004ED82B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 004FAFAD277133F9004ED82B /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 		004382DC27729BEC007C357A /* DetailLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLoadingView.swift; sourceTree = "<group>"; };
 		004382DE27729DB0007C357A /* CoinDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetail.swift; sourceTree = "<group>"; };
 		004382E027729E3B007C357A /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		004382E22772A179007C357A /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		004382E42772A1A7007C357A /* CoinDetailDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailDataService.swift; sourceTree = "<group>"; };
 		004FAFA6277133F7004ED82B /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		004FAFA9277133F7004ED82B /* CryptoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoApp.swift; sourceTree = "<group>"; };
 		004FAFAB277133F7004ED82B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				0063CAB327717A9E001395E3 /* CoinDataService.swift */,
 				0063CABB27718862001395E3 /* CoinImageService.swift */,
 				00973FE92771CCD400D20EA1 /* MarketDataService.swift */,
+				004382E42772A1A7007C357A /* CoinDetailDataService.swift */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 		004382D9277293D9007C357A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				004382E22772A179007C357A /* DetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -416,11 +422,13 @@
 				00973FDF2771B7A400D20EA1 /* UIApplicationExtensions.swift in Sources */,
 				00973FF12771D66600D20EA1 /* CoinLogoView.swift in Sources */,
 				00973FE62771C65E00D20EA1 /* HomeStatsView.swift in Sources */,
+				004382E32772A179007C357A /* DetailViewModel.swift in Sources */,
 				00973FEA2771CCD400D20EA1 /* MarketDataService.swift in Sources */,
 				0063CABE27718982001395E3 /* CoinImageViewModel.swift in Sources */,
 				004FAFB927713500004ED82B /* ColorExtensions.swift in Sources */,
 				004FAFC6277138BF004ED82B /* CircleButtonAnimationView.swift in Sources */,
 				00973FEC2771D25900D20EA1 /* PortfolioView.swift in Sources */,
+				004382E52772A1A7007C357A /* CoinDetailDataService.swift in Sources */,
 				0063CABC27718862001395E3 /* CoinImageService.swift in Sources */,
 				004382DF27729DB0007C357A /* CoinDetail.swift in Sources */,
 				00973FE12771C2B500D20EA1 /* Statistic.swift in Sources */,

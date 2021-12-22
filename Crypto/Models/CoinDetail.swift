@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// JSONDATA
 /*
  URL: https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false
 
@@ -115,6 +115,7 @@ struct CoinDetail: Codable {
   }
 }
 
+
 struct Links: Codable {
   let homepage: [String]?
   let subredditURL: String?
@@ -124,6 +125,7 @@ struct Links: Codable {
     case subredditURL = "subreddit_url"
   }
 }
+
 
 struct Description: Codable {
   let en: String?
