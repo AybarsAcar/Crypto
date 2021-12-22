@@ -35,6 +35,7 @@ class CoinDataService {
     // because we will cancel it at the end to save on memory since it is not a WEB Socket connection
     coinSubscription = NetworkingManager.download(url: url) // our custom download method runs on the back thread and receives on the main thread
       .decode(type: [Coin].self, decoder: JSONDecoder())
+      .receive(on: DispatchQueue.main) // receive on the main thread, UI updates done on the main thread
       .sink { completion in
         // handles the error state
         NetworkingManager.handleCompletion(completion)

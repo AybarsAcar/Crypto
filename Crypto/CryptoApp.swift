@@ -18,6 +18,10 @@ struct CryptoApp: App {
     // override the navigation bar titles
     UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
     UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(.theme.accent)]
+    UINavigationBar.appearance().tintColor = UIColor(.theme.accent)
+    
+    // make the table views background clear by default - i.e. List Component
+    UITableView.appearance().backgroundColor = UIColor.clear
   }
   
   var body: some Scene {
@@ -28,6 +32,7 @@ struct CryptoApp: App {
           HomeView()
             .navigationBarHidden(true) // to prevent the default navigation bar
         }
+        .navigationViewStyle(.stack)
         .environmentObject(viewModel) // all the children will have access to this viewModel
         
         ZStack {

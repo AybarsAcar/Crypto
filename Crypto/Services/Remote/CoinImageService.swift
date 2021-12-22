@@ -53,6 +53,7 @@ class CoinImageService {
       .tryMap({ (data) -> UIImage? in
         return UIImage(data: data)
       })
+      .receive(on: DispatchQueue.main) // receive on the main thread, UI updates done on the main thread
       .sink { completion in
         // handles the error state
         NetworkingManager.handleCompletion(completion)

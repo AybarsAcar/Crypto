@@ -32,7 +32,7 @@ struct HomeView: View {
         .sheet(isPresented: $isPortfolioViewDisplayed, onDismiss: {
           isPortfolioViewDisplayed = false
         }, content: {
-          PortfolioView()
+          EditPortfolioView()
             .environmentObject(viewModel)
         })
       
@@ -56,11 +56,18 @@ struct HomeView: View {
         }
         
         if showPortfolio {
-          portfolioCoinsList
-            .refreshable {
-              viewModel.reloadData()
+          ZStack(alignment: .top) {
+            
+            if viewModel.portfolioCoins.isEmpty && viewModel.searchText.isEmpty {
+              emptyPortfolio
+            } else {
+              portfolioCoinsList
+                .refreshable {
+                  viewModel.reloadData()
+                }
             }
-            .transition(.move(edge: .trailing))
+          }
+          .transition(.move(edge: .trailing))
         }
         
         Spacer()
@@ -155,7 +162,7 @@ extension HomeView {
     }
     .listStyle(.plain)
   }
- 
+  
   
   private var columnTitles: some View {
     HStack {
@@ -192,7 +199,7 @@ extension HomeView {
       
       HStack(spacing: 4) {
         Text("Price")
-          
+        
         Image(systemName: "chevron.down")
           .opacity((viewModel.sortOption == .price || viewModel.sortOption == .priceReversed) ? 1.0 : 0.0)
           .rotationEffect(Angle(degrees: viewModel.sortOption == .price ? 0 : 180))
@@ -213,5 +220,15 @@ extension HomeView {
   private func lazyNavigate(coin: Coin) {
     selectedCoin = coin
     isDetailViewDisplayed.toggle()
+  }
+  
+  
+  private var emptyPortfolio: some View {
+    Text("You haven't added any coins to your portfolio yet... Click the + button to get started!")
+      .font(.callout)
+      .foregroundColor(.theme.accent)
+      .fontWeight(.medium)
+      .multilineTextAlignment(.center)
+      .padding(50)
   }
 }

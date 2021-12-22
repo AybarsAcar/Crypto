@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct PortfolioView: View {
+struct EditPortfolioView: View {
   
   @Environment(\.presentationMode) var presentationMode
   @EnvironmentObject private var viewModel: HomeViewModel
@@ -33,6 +33,7 @@ struct PortfolioView: View {
           }
         }
       }
+      .background(Color.theme.background.opacity(0.6).ignoresSafeArea())
       .navigationTitle("Edit Portfolio")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -58,13 +59,13 @@ struct PortfolioView: View {
 
 struct PortfolioView_Previews: PreviewProvider {
   static var previews: some View {
-    PortfolioView()
+    EditPortfolioView()
       .environmentObject(dev.homeViewModel)
   }
 }
 
 
-extension PortfolioView {
+extension EditPortfolioView {
   
   private var coinLogoList: some View {
     ScrollView(.horizontal, showsIndicators: false) {

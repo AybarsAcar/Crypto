@@ -20,11 +20,23 @@ struct SettingsView: View {
   
   var body: some View {
     NavigationView {
-      List {
-        linksSection
-        coingeckoSection
-        developerSection
-        applicationSection
+      ZStack {
+        // background
+        Color.theme.background
+          .opacity(0.6)
+          .ignoresSafeArea()
+        
+        // content
+        List {
+          linksSection
+            .listRowBackground(Color.theme.background.opacity(0.4))
+          coingeckoSection
+            .listRowBackground(Color.theme.background.opacity(0.4))
+          developerSection
+            .listRowBackground(Color.theme.background.opacity(0.4))
+          applicationSection
+            .listRowBackground(Color.theme.background.opacity(0.4))
+        }
       }
       .listStyle(.grouped)
       .navigationTitle("Settings")
