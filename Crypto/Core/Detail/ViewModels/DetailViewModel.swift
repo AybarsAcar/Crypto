@@ -42,7 +42,7 @@ class DetailViewModel: ObservableObject {
   
   
   private func mapDataToStatistics(coinDetailModel: CoinDetail?, coinModel: Coin) -> (overview: [Statistic], additional: [Statistic]) {
-  
+    
     return (createOverviewArray(coinModel: coinModel), createAdditionalArray(coinModel: coinModel, coinDetailModel: coinDetailModel))
   }
   
