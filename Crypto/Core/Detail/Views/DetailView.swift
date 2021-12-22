@@ -10,7 +10,9 @@ import SwiftUI
 
 struct DetailView: View {
   
-  @StateObject var viewModel: DetailViewModel
+  @StateObject private var viewModel: DetailViewModel
+  
+  @State private var showFullDesctiption: Bool = false
   
   private let colums: [GridItem] = [
     GridItem(.flexible()),
@@ -35,15 +37,20 @@ struct DetailView: View {
           
           overviewTitle
           Divider()
+          
+          descriptionSection
+          
           overviewGrid
           
           additionalTitle
           Divider()
           additionalGrid
           
+          externalLinksSection
+          
         }
         .padding()
-
+        
       }
     }
     .navigationTitle(viewModel.coin.name)
@@ -119,5 +126,58 @@ extension DetailView {
       CoinImageView(coin: viewModel.coin)
         .frame(width: 25, height: 25, alignment: .center)
     }
+  }
+  
+  private var descriptionSection: some View {
+    ZStack {
+      if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
+        VStack(alignment: .leading) {
+          Text(coinDescription)
+            .lineLimit(showFullDesctiption ? nil : 3)
+            .font(.callout)
+            .foregroundColor(.theme.secondaryText)
+          
+          Button(action: {
+            withAnimation(.easeInOut) {
+              showFullDesctiption.toggle()
+            }
+          }, label: {
+            Text(showFullDesctiption ? "Less" : "Read more...")
+              .font(.caption)
+              .bold()
+              .padding(.vertical, 4)
+          })
+            .accentColor(.blue)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+      }
+    }
+  }
+  
+  private var externalLinksSection: some View {
+    VStack(alignment: .trailing, spacing: 10) {
+      if let websiteString = viewModel.websiteURL,
+         let url = URL(string: websiteString) {
+        HStack {
+          Link("Website", destination: url)
+            .accentColor(.blue)
+          Image(systemName: "arrow.up.right.square")
+            .foregroundColor(.blue)
+        }
+      }
+      
+      if let redditString = viewModel.redditURL,
+         let url = URL(string: redditString) {
+        HStack {
+          Link("Reddit", destination: url)
+            .accentColor(.blue)
+          
+          Image(systemName: "arrow.up.right.square")
+            .foregroundColor(.blue)
+        }
+      }
+    }
+    .frame(maxWidth: .infinity, alignment: .trailing)
+    .font(.footnote)
   }
 }

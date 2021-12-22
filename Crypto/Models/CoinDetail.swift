@@ -110,8 +110,7 @@ struct CoinDetail: Codable {
   }
   
   var readableDescription: String? {
-    //        return description?.en?.removingHTMLOccurances
-    return ""
+    return description?.en?.withoutHTMLTags
   }
 }
 
