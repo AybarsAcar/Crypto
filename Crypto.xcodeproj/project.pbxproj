@@ -48,6 +48,7 @@
 		00973FEC2771D25900D20EA1 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00973FEB2771D25900D20EA1 /* PortfolioView.swift */; };
 		00973FEF2771D41800D20EA1 /* XMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00973FEE2771D41800D20EA1 /* XMarkButton.swift */; };
 		00973FF12771D66600D20EA1 /* CoinLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00973FF02771D66600D20EA1 /* CoinLogoView.swift */; };
+		00FD3EFD27730EF200EA762F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FD3EFC27730EF200EA762F /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		00973FEB2771D25900D20EA1 /* PortfolioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		00973FEE2771D41800D20EA1 /* XMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMarkButton.swift; sourceTree = "<group>"; };
 		00973FF02771D66600D20EA1 /* CoinLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinLogoView.swift; sourceTree = "<group>"; };
+		00FD3EFC27730EF200EA762F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,12 +206,12 @@
 			isa = PBXGroup;
 			children = (
 				004FAFB827713500004ED82B /* ColorExtensions.swift */,
+				004382E8277300A6007C357A /* DateExtensions.swift */,
 				0063CAAE27715F33001395E3 /* DoubleExtensions.swift */,
 				004FAFCC27715C71004ED82B /* PreviewProviderExtensions.swift */,
+				004382EA277307EE007C357A /* StringExtensions.swift */,
 				00973FDE2771B7A400D20EA1 /* UIApplicationExtensions.swift */,
 				004382E027729E3B007C357A /* ViewExtensions.swift */,
-				004382E8277300A6007C357A /* DateExtensions.swift */,
-				004382EA277307EE007C357A /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -220,6 +222,7 @@
 				004FAFC02771363F004ED82B /* Components */,
 				004382D7277293CA007C357A /* Detail */,
 				004FAFBB27713566004ED82B /* Home */,
+				00FD3EFA27730EC400EA762F /* Settings */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -338,6 +341,22 @@
 			path = XMarkButton;
 			sourceTree = "<group>";
 		};
+		00FD3EFA27730EC400EA762F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				00FD3EFB27730EDC00EA762F /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		00FD3EFB27730EDC00EA762F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00FD3EFC27730EF200EA762F /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -433,6 +452,7 @@
 				004382E72772FB1E007C357A /* ChartView.swift in Sources */,
 				00973FE62771C65E00D20EA1 /* HomeStatsView.swift in Sources */,
 				004382EB277307EE007C357A /* StringExtensions.swift in Sources */,
+				00FD3EFD27730EF200EA762F /* SettingsView.swift in Sources */,
 				004382E32772A179007C357A /* DetailViewModel.swift in Sources */,
 				004382E9277300A6007C357A /* DateExtensions.swift in Sources */,
 				00973FEA2771CCD400D20EA1 /* MarketDataService.swift in Sources */,

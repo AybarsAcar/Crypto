@@ -14,7 +14,9 @@ struct HomeView: View {
   
   @State private var showPortfolio: Bool = false
   
-  @State private var isPortfolioViewDisplayed: Bool = false
+  @State private var isPortfolioViewDisplayed: Bool = false // new sheet
+  
+  @State private var isSettingsViewDisplayed: Bool = false // new sheet
   
   
   // navigation variables
@@ -63,6 +65,11 @@ struct HomeView: View {
         
         Spacer()
       }
+      .sheet(isPresented: $isSettingsViewDisplayed, onDismiss: {
+        isSettingsViewDisplayed = false
+      }, content: {
+        SettingsView()
+      })
     }
     .background(
       NavigationLink(destination: DetailLoadingView(coin: $selectedCoin), isActive: $isDetailViewDisplayed, label: { EmptyView() })
@@ -92,7 +99,10 @@ extension HomeView {
         .onTapGesture {
           if showPortfolio {
             isPortfolioViewDisplayed = true
+          } else {
+            isSettingsViewDisplayed = true
           }
+          
         }
         .background(
           CircleButtonAnimationView(animate: $showPortfolio)
